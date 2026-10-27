@@ -97,7 +97,7 @@
         <!-- Base map image from the client's slides -->
         @if ($mapImage)
           <div id="block-image-view" class="absolute inset-0 bg-slate-900">
-            <img src="{{ $mapImage }}" alt="Base map of block {{ $block->code }}" onclick="openMapImage()" class="w-full h-full object-cover cursor-zoom-in">
+            <img src="{{ $mapImage }}" alt="Base map of block {{ $block->code }}" onclick="openMapImage()" onerror="window.mapImageFailed = true; if (window.mapImageMissing) mapImageMissing();" class="w-full h-full object-cover cursor-zoom-in">
             <span class="absolute bottom-1 left-1 right-1 text-[9px] text-white bg-slate-900/70 px-1.5 py-0.5 rounded">{{ config('block_map.image_source') }} · click to enlarge</span>
           </div>
 
@@ -495,6 +495,17 @@
     });
   });
   function openMapImage() { document.getElementById('map-image-box').classList.remove('hidden'); }
+
+  // Base map image could not load (e.g. file missing on the server): show the location map instead
+  window.mapImageMissing = function () {
+    var imageView = document.getElementById('block-image-view');
+    if (!imageView) return;
+    imageView.classList.add('hidden');
+    document.getElementById('block-map-view').classList.remove('hidden');
+    document.querySelectorAll('.map-toggle').forEach(function (b) { b.parentNode.classList.add('hidden'); });
+    if (blockMap) setTimeout(function () { blockMap.invalidateSize(); blockMap.fitBounds(blockBounds, { padding: [30, 30] }); }, 0);
+  };
+  if (window.mapImageFailed) window.mapImageMissing();
   function closeMapImage() { document.getElementById('map-image-box').classList.add('hidden'); }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && document.getElementById('map-image-box')) closeMapImage(); });
 

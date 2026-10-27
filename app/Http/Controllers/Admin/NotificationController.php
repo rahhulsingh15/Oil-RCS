@@ -63,12 +63,12 @@ class NotificationController extends Controller
         $result = $alerts->run();
 
         AuditLog::record('alerts-check', null, [], $result,
-            "Deadline check run by hand: {$result['upcoming']} upcoming, {$result['overdue']} overdue, {$result['notified']} notifications");
+            "Deadline check run by hand: {$result['upcoming']} upcoming, ".($result['reminder'] ?? 0)." reminder, {$result['overdue']} overdue, {$result['notified']} notifications");
 
-        $new = $result['upcoming'] + $result['overdue'];
+        $new = $result['upcoming'] + ($result['reminder'] ?? 0) + $result['overdue'];
 
         return back()->with('success', $new
-            ? "Check done: {$result['upcoming']} new upcoming and {$result['overdue']} new overdue deadline(s) notified to {$result['notified']} user notification(s)."
+            ? "Check done: {$result['upcoming']} due soon, ".($result['reminder'] ?? 0)." reminder and {$result['overdue']} overdue alert(s); {$result['notified']} notification(s) sent."
             : 'Check done: no new deadlines to notify. Everything already notified is unchanged.');
     }
 

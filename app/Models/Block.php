@@ -47,7 +47,10 @@ class Block extends Model
     {
         $path = config("block_map.blocks.{$this->code}.image");
 
-        return $path && is_file(public_path($path)) ? asset($path) : null;
+        // No file check here: on shared hosting the web folder is often public_html,
+        // not public/, so public_path() would wrongly say the file is missing.
+        // The page falls back to the location map if the image does not load.
+        return $path ? asset($path) : null;
     }
 
     /** [lat, lng] of the block centre from config/block_map.php, or null. */

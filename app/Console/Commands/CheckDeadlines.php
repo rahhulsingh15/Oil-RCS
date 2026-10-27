@@ -18,9 +18,9 @@ class CheckDeadlines extends Command
         $result = $alerts->run();
 
         AuditLog::record('alerts-check', null, [], $result,
-            "Deadline check: {$result['upcoming']} upcoming, {$result['overdue']} overdue, {$result['notified']} notifications");
+            "Deadline check: {$result['upcoming']} upcoming, ".($result['reminder'] ?? 0)." reminder, {$result['overdue']} overdue, {$result['notified']} notifications");
 
-        $this->info("Deadline check done: {$result['upcoming']} new upcoming, {$result['overdue']} new overdue, {$result['notified']} notifications sent to users.");
+        $this->info("Deadline check done: {$result['upcoming']} new due soon, ".($result['reminder'] ?? 0)." new reminder, {$result['overdue']} new overdue, {$result['notified']} notifications sent to users.");
 
         return self::SUCCESS;
     }

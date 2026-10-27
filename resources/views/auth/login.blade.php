@@ -94,8 +94,8 @@
               <i class="fa-solid fa-bell text-amber-400 text-sm"></i>
             </span>
             <div>
-              <p class="text-white font-semibold text-[14px]">Automated alerts</p>
-              <p class="text-slate-400 text-[13px]">Email reminders before due dates and on overdue items</p>
+              <p class="text-white font-semibold text-[14px]">Automated notifications</p>
+              <p class="text-slate-400 text-[13px]">Portal notifications before due dates and on overdue items</p>
             </div>
           </li>
           <li class="flex items-start gap-3.5">
