@@ -9,6 +9,7 @@ use App\Services\ComplianceSummary;
 use App\Support\Permissions;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +23,12 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // When the site address is https (APP_URL in .env), build every link and image
+        // with https too. Otherwise browsers block http images on an https page.
+        if (str_starts_with((string) config('app.url'), 'https://')) {
+            URL::forceScheme('https');
+        }
+
         // Every key in config/permissions.php becomes a Gate ability,
         // so @can('users.edit') and ->can('users.edit') work everywhere.
         // Other abilities (e.g. "view" on a Block) fall through to the policies.
