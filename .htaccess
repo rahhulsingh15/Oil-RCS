@@ -1,0 +1,13 @@
+# Hostinger (and similar hosting): the whole Laravel project sits inside the web folder.
+# Send every request to public/, so only the public files can be reached and the
+# app code, .env, storage (logs, uploaded documents) and database/data (client Excel)
+# can never be downloaded from the internet.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(?!public/)(.*)$ public/$1 [L]
+</IfModule>
+
+# If URL rewriting is ever switched off, refuse everything instead of exposing files.
+<IfModule !mod_rewrite.c>
+    Require all denied
+</IfModule>
