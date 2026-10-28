@@ -7,25 +7,12 @@
   <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
   <title>Sign in · RSC Compliance Portal</title>
 
-  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <link rel="stylesheet" href="{{ asset('css/portal.css') }}?v={{ @filemtime(public_path('css/portal.css')) }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            oilSidebar: '#0b1626',
-            oilSidebarDark: '#070e19',
-            oilSidebarActive: '#1a2e4c',
-          },
-          fontFamily: { sans: ['Inter', 'system-ui', 'Segoe UI', 'Roboto', 'sans-serif'] }
-        }
-      }
-    }
-  </script>
+
 
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }

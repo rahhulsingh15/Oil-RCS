@@ -64,7 +64,7 @@
         <h4 class="font-bold text-[13px] uppercase tracking-wider text-slate-800">Blocks: Onland vs Offshore</h4>
         <span class="text-[10px] text-slate-400">Active blocks (relinquished not included)</span>
       </div>
-      <div class="relative w-64 h-64 mx-auto my-3 flex items-center justify-center">
+      <div class="relative w-52 h-52 sm:w-64 sm:h-64 mx-auto my-3 flex items-center justify-center">
         <canvas id="typeDonutCanvas"></canvas>
         <div class="absolute text-center pointer-events-none">
           <p class="text-4xl font-extrabold text-slate-900 leading-none">{{ $typeTotal }}</p>
@@ -245,6 +245,7 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     if (typeof Chart === 'undefined') return;

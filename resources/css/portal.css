@@ -1,0 +1,31 @@
+/* Source of public/css/portal.css (build command in tailwind.portal.config.js) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Phone & tablet ---------- */
+@media (max-width: 767px) {
+  /* Wide tables scroll sideways instead of squeezing every column */
+  .overflow-x-auto > table:not(.table-fixed) {
+    min-width: 680px;
+  }
+
+  /* ...and keep the first column (block / name) visible while scrolling */
+  .overflow-x-auto > table:not(.table-fixed) > thead > tr > th:first-child,
+  .overflow-x-auto > table:not(.table-fixed) > tbody > tr > td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: #ffffff;
+    box-shadow: 1px 0 0 #e2e8f0;
+  }
+  .overflow-x-auto > table:not(.table-fixed) > thead > tr > th:first-child {
+    background-color: #f8fafc;
+  }
+
+  /* Comfortable tap size for icon buttons in table rows */
+  td a > i.fa-solid,
+  td button > i.fa-solid {
+    padding: 2px;
+  }
+}
