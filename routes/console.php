@@ -8,4 +8,4 @@ use Illuminate\Support\Facades\Schedule;
 |   - server: cron  * * * * *  php /path/to/artisan schedule:run
 |   - Windows (XAMPP): Task Scheduler, every minute: php artisan schedule:run
 */
-Schedule::command('alerts:check')->dailyAt('08:00')->withoutOverlapping();
+Schedule::command('alerts:check')->dailyAt('08:00')->timezone('Asia/Kolkata')->withoutOverlapping();
